@@ -42,3 +42,7 @@ Potential paying users: TapeOut processor creators, ecosystem marketplaces, corp
 - Never send money to a wallet on the basis of a dashboard. No seed/private keys belong here.
 
 MIT License. Attribution required only for the underlying MIT license notice. This repo does not affiliate with OKX or TapeOut.
+
+### Optional machine-to-machine API (separate x402 service)
+
+A **new** directly owner-receivable 0.005 Base mainnet Circle USDC read-only TapeOut genesis CPU report is exposed through the original VM5 x402 API infrastructure. Free terms: https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-sample ; paid GET: https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report . Chain 196 public readings are pinned before an x402 payment requirement. The dedicated route's destination is the **original owner's VM1 MetaMask**, unlike historical VM5 merchant products. Source: https://github.com/livastic-vm5-primary-20260911/x402-openapi-lint/tree/main/tapeout . **This is a no-spend seller launch, not verified sales or a promise of available buyer funds.** The free browser app remains genuinely free.
