@@ -1,0 +1,52 @@
+name: TapeOut Onchain Evidence Pilot — Inquiry
+description: Request a no-obligation written quote for an independent, fixed-scope X Layer TapeOut change-evidence report. No wallet connection required.
+title: "[PILOT] TapeOut pinned-block evidence request"
+labels: ["commercial-inquiry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## No payment required to inquire
+        The live self-service TapeOut Integrity Lens is free. For teams that need a bespoke reproducible **onchain state-change report**, request a quote here. This GitHub issue is **public**; do not post private data, live private invoices, credentials, wallet private keys, seed phrases, personal data or material nonpublic information. Email onecursor1@gmail.com for a confidential pre-sale discussion.
+
+        Indicative **USD 49 or equivalent in verified Base USDC** for one bounded research report, subject to written scope and mutual acceptance. No automatic checkout or pre-authorized charge. The owner’s VM1 public wallet may be used to receive payment only once a specific asset, chain, contract and scope are agreed. The tool neither performs nor audits transactions.
+  - type: input
+    id: project
+    attributes:
+      label: Project / organization (public, optional)
+      placeholder: Example DeFi Factory Tools
+    validations:
+      required: false
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Preferred fixed scope
+      options:
+        - Factory and market settings at two given X Layer blocks
+        - Factory/market settings and 1 TapeOut CPU registry index
+        - Factory/market settings and up to 3 TapeOut CPU registry indices
+        - Need a bespoke quote
+    validations:
+      required: true
+  - type: input
+    id: indices
+    attributes:
+      label: Relevant CPU indices, if any (public integers)
+      placeholder: "0, 5, 12"
+    validations:
+      required: false
+  - type: textarea
+    id: expectation
+    attributes:
+      label: Expected deliverables / verification question
+      description: Describe only public chain facts or safe synthetic examples. No secrets or PII.
+      placeholder: Reproducible on-chain data (at two blocks) with plain-English changed-fee/proxy/sealing summary, JSON and CSV evidence.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Service boundaries
+      options:
+        - label: I understand this is a no-obligation, public inquiry and NOT a formal security audit, wallet custody service, token endorsement, or guarantee of future state or payment.
+          required: true
