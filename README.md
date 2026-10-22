@@ -4,6 +4,8 @@
 
 It reads live data pinned to one block on X Layer **mainnet chain 196**. No backend, API key, wallet connect, sign-in, paid API, transaction signing, smart contract deployment, bridge, deposit or trading required.
 
+**[Open live demo](https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/)** · **[Watch actual 19-second read-only demo](https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-lens-demo.mp4)** · [Screenshot](demo/poster.png) · [Example JSON](demo/sample-live-export.json)
+
 ## Features
 
 - TapeOut CPU factory: on-chain CPU count, current deployment/protocol fees, owner, `isSealed` and EIP-1967 proxy implementation.
