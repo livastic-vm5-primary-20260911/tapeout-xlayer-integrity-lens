@@ -31,7 +31,7 @@ No JS runtime dependency or build step. `ethers` was used only in development to
 
 ### Current business model and revenue limitations
 
-Potential paying users: TapeOut processor creators, ecosystem marketplaces, corporate security reviewers, Web3 automation builders. Possible commercial offerings: independent recurring audit snapshots, programmable change alerts, and evidence bundles for procurement / governance review. **None are implemented as a paid checkout in this free prototype. No customer, sale, prize award, subscription or future income is implied.** Any paid scope, payer, payout network, owner wallet and fee must be individually agreed before taking an order.
+Potential paying users: TapeOut processor creators, ecosystem marketplaces, corporate security reviewers, Web3 automation builders. **Available today:** the public browser explorer is entirely free, and a *separate* optional x402 v2 JSON API is deployed for buyer-authorized payments of **0.005 native Circle Base USDC per GET** directly to the original owner VM1 receiving wallet. [Free API sample](https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-sample) requires no payment; [paid machine endpoint](https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-report) returns HTTP 402 before compatible buyer-side authorization. A separate [indicative USD-equivalent $49 custom evidence pilot](./commercial.html) requires an explicit written paid scope and acceptance terms; there is **no live custom human-report checkout**. Recurring alerts and subscriptions are not implemented. **No independent paying customer, signed service order, prize award or realized revenue for the new TapeOut paid endpoint has been verified; a deployed HTTP 402 is not a completed purchase.**
 
 ### Caveats
 
