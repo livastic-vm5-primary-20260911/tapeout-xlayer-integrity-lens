@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Free, read-only TapeOut contract intelligence on X Layer. Live protocol fees, proxy status, CPU processor inspection, and verifiable JSON snapshot.">
+  <meta name="theme-color" content="#101620">
+  <title>TapeOut Integrity Lens • X Layer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101620'/%3E%3Cpath d='M13 39L26 25L36 34L50 19' fill='none' stroke='%2386f7c0' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.mjs"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#" aria-label="TapeOut Integrity Lens home"><span class="brand-mark" aria-hidden="true">◈</span><span>TAPEOUT <b>LENS</b></span></a>
+  <nav class="header-actions"><a href="https://www.okx.com/web3/explorer/xlayer" target="_blank" rel="noopener noreferrer">X Layer Explorer ↗</a><a href="https://github.com/NetLayerLabs/Cerebr/blob/main/TAPEOUT.md" target="_blank" rel="noopener noreferrer">Integration reference ↗</a></nav>
+</header>
+<main class="container">
+  <section class="hero" aria-labelledby="hero-head">
+    <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> X LAYER MAINNET · CHAIN 196 · PUBLIC READS ONLY</div>
+    <h1 id="hero-head">Understand the contract.<br><span>Before the transaction.</span></h1>
+    <p>Independent, live-read TapeOut factory, circuit market and processor transparency. Inspect fees, upgradeability and on-chain state without connecting a wallet or broadcasting a transaction.</p>
+    <div class="hero-actions">
+      <button class="primary" id="refresh" type="button">↻ Refresh live chain state</button>
+      <button class="secondary" id="download-json" type="button" disabled>↓ Export JSON evidence</button>
+      <button class="secondary" id="download-csv" type="button" disabled>↓ Export CSV</button>
+    </div>
+    <div class="reading-status"><span id="status-pill" class="pill muted">Not loaded</span><span id="status-text" aria-live="polite">Connect to public X Layer RPC to begin.</span></div>
+  </section>
+  <section class="summary-grid" aria-label="Chain summary">
+    <article class="metric"><span class="metric-label">Processor count</span><strong id="cpu-count">—</strong><small>TapeOut factory · live</small></article>
+    <article class="metric"><span class="metric-label">CPU creation fee</span><strong id="deployment-fee">—</strong><small>OKB · excludes gas</small></article>
+    <article class="metric"><span class="metric-label">Circuit listing fee</span><strong id="market-fee">—</strong><small>Current market rate</small></article>
+    <article class="metric"><span class="metric-label">Pinned block</span><strong id="block-number">—</strong><small id="sample-time">No snapshot yet</small></article>
+  </section>
+  <section class="panel-grid">
+    <article class="panel">
+      <div class="section-head"><div><div class="eyebrow">01 / CONTRACT CONTROLS</div><h2>Upgrade & authority surface</h2></div><span class="kicker">ONCHAIN</span></div>
+      <div class="control-row"><span>Factory implementation</span><span id="factory-impl" class="address-field">—</span></div>
+      <div class="control-row"><span>Factory owner</span><span id="factory-owner" class="address-field">—</span></div>
+      <div class="control-row"><span>Factory sealed</span><span id="factory-sealed" class="value">—</span></div>
+      <div class="control-row"><span>Market implementation</span><span id="market-impl" class="address-field">—</span></div>
+      <div class="control-row"><span>Market owner</span><span id="market-owner" class="address-field">—</span></div>
+      <div class="control-row"><span>Market sealed</span><span id="market-sealed" class="value">—</span></div>
+      <div class="control-row"><span>Market next listing ID</span><span id="market-listings" class="value">—</span></div>
+      <p class="annotation">A proxy implementation slot and a false sealing flag signal that administrative changes may remain possible. They do not establish malicious behavior or prove the current implementation unsafe.</p>
+    </article>
+    <article class="panel">
+      <div class="section-head"><div><div class="eyebrow">02 / PROCESSOR INSPECTOR</div><h2>Inspect any TapeOut CPU</h2></div></div>
+      <form id="selector-form" class="form-inline">
+        <label for="cpu-index">CPU registry index</label>
+        <div class="input-line"><input id="cpu-index" type="number" min="0" step="1" value="0" inputmode="numeric" required><button class="secondary" type="submit">Inspect CPU →</button></div>
+      </form>
+      <div class="control-row"><span>Circuits contract</span><span id="processor-circuits" class="address-field">—</span></div>
+      <div class="control-row"><span>Transistor token</span><span id="processor-transistors" class="address-field">—</span></div>
+      <div class="control-row"><span>Processor creator</span><span id="processor-creator" class="address-field">—</span></div>
+      <div class="control-row"><span>Circuits minted (last ID)</span><span id="processor-circuits-count" class="value">—</span></div>
+      <div class="control-row"><span>Transistors minted / cap</span><span id="processor-supply" class="value">—</span></div>
+      <div class="control-row"><span>Transistor mint unit price</span><span id="processor-price" class="value">—</span></div>
+      <div class="control-row"><span>Tapeout fixed fee</span><span id="processor-tapeout" class="value">—</span></div>
+      <p class="annotation">Processor 0 is TapeOut's genesis X Layer CPU. CPU address and protocol terms are read from the factory and processor contracts at the same block.</p>
+    </article>
+  </section>
+  <section class="lower-grid">
+    <article class="panel">
+      <div class="section-head"><div><div class="eyebrow">03 / COST SIMULATOR</div><h2>Fee preview — no transaction</h2></div></div>
+      <form id="quote-form" class="form-inline">
+        <label for="mint-count">Transistor units</label>
+        <div class="input-line"><input id="mint-count" type="number" min="1" max="1000000000" step="1" value="100" required><button class="secondary" type="submit">Calculate →</button></div>
+      </form>
+      <div class="quote"><span>Mint transaction value</span><strong id="mint-total">—</strong><small>Token units × current processor mintPrice + its flat protocolFee; network gas not included.</small></div>
+      <div class="quote"><span>One tapeout contract fee</span><strong id="tapeout-total">—</strong><small>Excludes gas and NAND/LATCH input inventory consumed by circuit design.</small></div>
+      <p class="annotation">Quotes are snapshots, not executable offers. Read fees again before any owner-operated transaction; this tool never creates or signs one.</p>
+    </article>
+    <article class="panel">
+      <div class="section-head"><div><div class="eyebrow">04 / VERIFICATION NOTES</div><h2>What deserves a second look</h2></div></div>
+      <ul id="diagnostics" class="diagnostics"><li class="diagnostic">No data yet. Read chain state to inspect configuration.</li></ul>
+    </article>
+  </section>
+  <section class="evidence">
+    <div><h2>Inspect the source, not the marketing.</h2><p>Every value comes from public on-chain reads pinned to a common block. Export an evidence snapshot with block number, contract addresses and retrieved values. This is operational transparency—not a security audit, token endorsement, custody check, escrow verification or financial advice.</p></div>
+    <a class="evidence-link" href="https://web3.okx.pro/onchainos/dev-docs/xlayer/developer/rpc-endpoints/rpc-endpoints" target="_blank" rel="noopener noreferrer">Official X Layer RPC docs ↗</a>
+  </section>
+</main>
+<footer><span>TapeOut Integrity Lens · an independent, free, read-only prototype</span><span>No approvals · No seed phrase · No gas · No wallet connection</span></footer>
+</body>
+</html>

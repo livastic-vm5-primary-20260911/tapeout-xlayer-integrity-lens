@@ -1,0 +1,13 @@
+{
+  "name": "tapeout-xlayer-risk-lens",
+  "version": "1.0.0",
+  "description": "Read-only on-chain X Layer TapeOut fee and contract transparency explorer",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "snapshot": "node scripts/generate-evidence.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
