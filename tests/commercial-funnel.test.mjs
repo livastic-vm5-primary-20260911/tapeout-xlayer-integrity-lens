@@ -40,3 +40,20 @@ test('business model is factual: live microcheckout, no signed customer or recur
  assert.ok(readme.includes(market));
  assert.ok(!readme.includes('None are implemented as a paid checkout in this free prototype'));
 });
+
+
+test('distinct second TapeOut 0.01 BaseUSDC buyer SKU shows exact free sample, signed-free quote, and unapproved listing honesty',()=>{
+ const sample='https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-diff-sample';
+ const paid='https://vm5-openapi-x402.onrender.com/v1/tapeout-cpu0-diff';
+ for(const link of [sample,paid,'https://vm5-openapi-x402.onrender.com/discovery/resources'])
+  assert.ok(commercial.includes('href="'+link+'"'),link);
+ assert.ok(commercial.indexOf('href="'+sample+'"')<commercial.indexOf('href="'+paid+'"'));
+ assert.match(commercial,/0\.01 native Circle Base USDC/);
+ assert.match(commercial,/fixed October 23 CPU0 baseline/);
+ assert.match(commercial,/receipt\/badge remains pending/);
+ assert.match(commercial,/free in-browser comparison is always available/);
+ assert.ok(readme.includes('10,000 atomic'));
+ assert.match(readme,/listing is pending review, not live\/paid\/approved yet/);
+ assert.ok(readme.includes('No independent outside customer receipt'));
+ assert.ok(readme.includes('pre-existing 13 other merchant recipients'));
+});
