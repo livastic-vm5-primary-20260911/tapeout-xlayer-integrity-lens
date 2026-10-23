@@ -1,0 +1,50 @@
+{
+  "schema": "TapeOutXLayerRiskLens/change-review-v1",
+  "network": "eip155:196",
+  "cpuIndex": "0",
+  "baselineBlock": "73915245",
+  "liveBlock": "73947001",
+  "fieldsCompared": 20,
+  "changedCount": 2,
+  "counts": {
+    "identity": 0,
+    "control": 1,
+    "economics": 0,
+    "activity": 1
+  },
+  "priorities": [
+    {
+      "group": "control",
+      "count": 1,
+      "title": "Owner / proxy / sealing — review authority",
+      "guidance": "The observed authority, proxy implementation or sealing flag changed. Independently verify who controls it and when it changed."
+    },
+    {
+      "group": "activity",
+      "count": 1,
+      "title": "Counters / observations — track activity",
+      "guidance": "The recorded counter or identity value changed. This alone does not imply a security issue."
+    }
+  ],
+  "findings": [
+    {
+      "field": "factory.implementation",
+      "label": "Factory proxy implementation",
+      "before": "0x74956236ab64ed143933040b4137e8a352e4d17b",
+      "after": "0xb41c1e7602eb5734be2430b72178ccb814a5293d",
+      "group": "control",
+      "reviewOrder": 2,
+      "deltaAtomic": null
+    },
+    {
+      "field": "factory.cpuCount",
+      "label": "Registered processor count",
+      "before": "387",
+      "after": "388",
+      "group": "activity",
+      "reviewOrder": 4,
+      "deltaAtomic": "1"
+    }
+  ],
+  "provenance": "Deterministic review ordering of client-supplied (NOT independently authenticated) before/after X Layer values. Not a security finding, verified transaction, security score, audit, or on-chain attestation."
+}

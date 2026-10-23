@@ -1,10 +1,11 @@
 import {PublicRpc} from './rpc.mjs';
 import {decimalUnits,diagnostics,quoteMint,publicJson} from './core.mjs';
 import {compareSnapshots} from './compare.mjs';
+import {triageComparison} from './triage.mjs';
 
 const rpc=new PublicRpc();
 const el=id=>document.getElementById(id);
-let latest=null, busy=false, compared=null;
+let latest=null, busy=false, compared=null, reviewed=null;
 
 function setStatus(kind,message) {
  const pill=el('status-pill');
@@ -118,14 +119,48 @@ function csv(v){
  return rows.map(row=>row.map(value=>'"'+String(value).replaceAll('"','""')+'"').join(',')).join('\r\n')+'\r\n';
 }
 function clearComparison(message='Load an exported historical JSON snapshot to compare on-chain fields.'){
- compared=null;
+ compared=null; reviewed=null;
  el('comparison-summary').textContent=message;
  el('comparison-changes').replaceChildren();
  el('download-comparison').disabled=true;
+ el('review-summary').textContent='Complete a valid two-block comparison to order changed fields by review type.';
+ el('review-priorities').replaceChildren();
+ el('download-review').disabled=true;
+}
+function drawReview(review){
+ const heading=el('review-summary');
+ const total=review.changedCount;
+ if(total===0){
+  heading.textContent='No changes observed in the 20 whitelisted fields. This is not a contract safety guarantee.';
+ }else{
+  const c=review.counts;
+  heading.textContent=total+' changed fields: '+c.identity+' contract identity · '+
+   c.control+' owner/proxy/sealing · '+c.economics+' fees/limits · '+
+   c.activity+' activity/counters. Rule-based review order only, not a security verdict.';
+ }
+ const list=el('review-priorities');list.replaceChildren();
+ for(const group of review.priorities){
+  const li=document.createElement('li');
+  li.className='diagnostic '+(group.group==='identity'||group.group==='control'?'warning':'caution');
+  const heading=document.createElement('strong');
+  heading.textContent=group.title+' ('+group.count+')';
+  const desc=document.createElement('p');desc.className='triage-detail';desc.textContent=group.guidance;
+  li.append(heading,desc);
+  for(const finding of review.findings.filter(item=>item.group===group.group)){
+   const row=document.createElement('div');row.className='triage-field';
+   row.textContent=finding.label+': '+finding.before+' → '+finding.after+
+    (finding.deltaAtomic===null?'':' · signed change '+finding.deltaAtomic+' atomic units');
+   li.append(row);
+  }
+  list.append(li);
+ }
+ el('download-review').disabled=false;
 }
 function showComparison(baseline){
  const diff=compareSnapshots(baseline,latest);
  compared=diff;
+ reviewed=triageComparison(diff);
+ drawReview(reviewed);
  const label=diff.changes.length===0
    ? 'No differences found in '+diff.fieldsCompared+' compared fields.'
    : diff.changes.length+' field changes detected out of '+diff.fieldsCompared+'.';
@@ -184,6 +219,10 @@ el('refresh').addEventListener('click',refresh);
 el('compare-historical').addEventListener('click',compareHistorical);
 el('compare-bundled-example').addEventListener('click',compareBundledExample);
 el('baseline-file').addEventListener('change',()=>clearComparison('New local evidence selected. Click Compare with current block.'));
+el('download-review').addEventListener('click',()=>{
+ if(reviewed)download('tapeout-xlayer-review-'+reviewed.baselineBlock+'-to-'+reviewed.liveBlock+'.json',
+  publicJson(reviewed)+'\n','application/json');
+});
 el('download-comparison').addEventListener('click',()=>{
  if(compared)download('tapeout-xlayer-comparison-'+compared.baselineBlock+'-to-'+compared.liveBlock+'.json',
      publicJson(compared)+'\n','application/json');

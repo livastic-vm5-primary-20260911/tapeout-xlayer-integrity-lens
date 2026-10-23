@@ -7,8 +7,8 @@
   <meta name="theme-color" content="#101620">
   <title>TapeOut Integrity Lens • X Layer</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101620'/%3E%3Cpath d='M13 39L26 25L36 34L50 19' fill='none' stroke='%2386f7c0' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=20261023-bundled-example">
-  <script type="module" src="./src/app.mjs?v=20261023-bundled-example"></script>
+  <link rel="stylesheet" href="./styles.css?v=20261024-review">
+  <script type="module" src="./src/app.mjs?v=20261024-review"></script>
   <link rel="canonical" href="https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="TapeOut Integrity Lens">
@@ -117,6 +117,16 @@
     <p class="annotation" id="compare-import-warning">The file stays in your browser: no uploads, wallet connection, signing or transaction. You may use our <a href="./evidence/tapeout-cpu0-block73915245.json" target="_blank" rel="noopener noreferrer"><u>earlier CPU0 snapshot</u></a> when inspecting CPU 0. A <a href="./evidence/tapeout-compare-73915245-to-73947001.json" target="_blank" rel="noopener noreferrer"><u>real two-block example from 23 October</u></a> illustrates an observed count change and a proxy implementation-address difference (not a security finding). Imported JSON is user-supplied, not cryptographically authenticated; a detected difference is not proof of an exploit, threat or security audit.</p>
     <p id="comparison-summary" aria-live="polite" class="comparison-status">Load the live state, then select an older JSON snapshot to compare.</p>
     <ul class="diagnostics history-results" id="comparison-changes" aria-label="Changed fields"></ul>
+    <div class="triage-head">
+      <div>
+        <div class="eyebrow">06 / REVIEW ORDER · NO SECURITY SCORE</div>
+        <h3 id="review-heading">Which changes deserve attention first?</h3>
+      </div>
+      <button id="download-review" type="button" class="secondary" disabled>↓ Export review JSON</button>
+    </div>
+    <p class="annotation triage-notice">Deterministic follow-up checklist for your 20-field comparison: changed processor identity first, then owners/proxies/sealing, then fee and supply settings, then ordinary counters. A change is <strong>not</strong> an exploit. A missing change does <strong>not</strong> establish safety. Imported baseline data remain unverified by chain consensus; no wallet, subscription or upload is required.</p>
+    <p id="review-summary" class="comparison-status" aria-live="polite">Complete a valid two-block comparison to order changed fields by review type.</p>
+    <ul id="review-priorities" class="diagnostics history-results" aria-label="Review priorities"></ul>
   </section>
   <section class="evidence">
     <div><h2>Inspect the source, not the marketing.</h2><p>Every value comes from public on-chain reads pinned to a common block. Export an evidence snapshot with block number, contract addresses and retrieved values. This is operational transparency—not a security audit, token endorsement, custody check, escrow verification or financial advice.</p></div>

@@ -28,6 +28,7 @@ const FIELDS=Object.freeze([
   ['processor.protocolFee','Transistor token protocol fee (wei)','uint']
 ]);
 export const COMPARISON_SCHEMA='TapeOutXLayerRiskLens/comparison-v1';
+export const COMPARISON_FIELD_IDS=Object.freeze(FIELDS.map(row=>row[0]));
 const assertRecord=(x,name)=>{
   if (!x||typeof x!=='object'||Array.isArray(x)) throw new Error('Invalid '+name+' object');
 };

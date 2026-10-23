@@ -39,6 +39,6 @@ test('CPU0 example is explicitly single-origin, bounded and fail closed',()=>{
 });
 
 test('live homepage cache-busts versioned application JS after deployment',()=>{
- assert.match(html,/src="\.\/src\/app\.mjs\?v=20261023-bundled-example"/);
- assert.match(html,/href="\.\/styles\.css\?v=20261023-bundled-example"/);
+ assert.match(html,/src="\.\/src\/app\.mjs\?v=20261024-review"/);
+ assert.match(html,/href="\.\/styles\.css\?v=20261024-review"/);
 });

@@ -17,3 +17,11 @@
 .history-panel .history-results{gap:9px}
 .history-panel .history-results .diagnostic{overflow-wrap:anywhere}
 @media(max-width:650px){.history-panel .history-inputs{align-items:stretch;flex-direction:column}.history-panel .history-inputs button{width:100%}}
+
+.triage-head{margin-top:27px;padding-top:24px;border-top:1px solid #344956;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.triage-head h3{font-size:19px;letter-spacing:-.02em;margin:8px 0 0}
+.triage-notice{margin-top:11px;max-width:900px}
+.triage-detail{margin:6px 0;color:#9fb9c6;font-size:12px}
+.triage-field{padding:9px 0;border-top:1px solid #304554;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;color:#d5e8f2}
+.triage-field:first-of-type{margin-top:11px}
+@media(max-width:650px){.triage-head{flex-direction:column;align-items:stretch}.triage-head button{width:100%}}

@@ -31,6 +31,29 @@ Reference X Layer TapeOut contracts and interfaces independently described and t
 
 This local comparison offers genuine developer utility: it makes configuration drift at two exact X Layer blocks inspectable without paid surveillance or a wallet. It does not claim continuous monitoring, automatic notifications, attack detection, verified contract safety or existing customer revenue.
 
+### 24 October 2026: deterministic change-review priorities — shipped in the browser
+
+The free two-block comparator now turns real X Layer values into a **non-prescriptive review queue**. It does not infer compromise, label any token safe, issue a contract audit, or score probabilities. After the strict same-CPU comparison succeeds, the browser sorts exactly 20 recognized fields into:
+
+1. **Processor identity:** a changed circuits/transistor contract requires re-establishing that CPU's comparison baseline.
+2. **Owner, proxy, sealing:** verify who can change live contract behavior and whether an implementation or control flag moved.
+3. **Fees and supply limits:** recalculate an integration's economics from the newer block; prices are atomic uint256 integers, never rounded through JavaScript floating-point values.
+4. **Ordinary activity:** registration, listing and mint counters are presented as observations, not exploits.
+
+The review checklist is visible beneath the normal historical diff, and **Export review JSON** emits `TapeOutXLayerRiskLens/change-review-v1` with exactly bounded change fields and signed atomic deltas. Unknown fields, partial snapshots, mismatched chains, wrong CPU indexes, malformed 256-bit values, duplicate changes and inconsistent change/identity flags fail closed. Imported historical files are still **not authenticated by chain consensus**. Always independently verify historical state before operational decisions.
+
+**Reproduce the same real observed two-block change locally, no RPC, key or wallet:**
+
+```bash
+node scripts/review-evidence.mjs \
+  evidence/tapeout-cpu0-block73915245.json \
+  evidence/tapeout-cpu0-block73947001.json
+```
+
+[Actual reproducible review result](evidence/tapeout-review-block73915245-to-73947001.json): baseline block 73,915,245 → later block 73,947,001; **one owner/proxy/sealing review** (factory implementation changed) and **one ordinary counter observation** (CPU count 387→388). No exploitable vulnerability is alleged, and the difference alone cannot establish when an administrator executed an upgrade.
+
+The offline CLI enforces a 256 KiB per-file input cap and returns no partial output if validation fails. The browser code displays imported text with DOM `textContent`, not HTML; no secret upload, transaction, automatic polling or paid service call is added. Browser and CLI share the exact same comparison/triage code; full project tests now include tampered-input and real on-chain fixture regressions.
+
 ### Development
 
 Static website: `index.html`, `styles.css`, `src/core.mjs`, `src/rpc.mjs`, `src/app.mjs`.
