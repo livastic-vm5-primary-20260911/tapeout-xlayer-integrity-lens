@@ -25,3 +25,6 @@
 .triage-field{padding:9px 0;border-top:1px solid #304554;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;color:#d5e8f2}
 .triage-field:first-of-type{margin-top:11px}
 @media(max-width:650px){.triage-head{flex-direction:column;align-items:stretch}.triage-head button{width:100%}}
+
+footer a[href="https://twelve.tools/"]{color:inherit;text-decoration:underline;text-underline-offset:3px}
+footer a[href="https://twelve.tools/"]:hover,footer a[href="https://twelve.tools/"]:focus-visible{color:var(--mint)}
