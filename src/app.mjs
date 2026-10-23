@@ -123,6 +123,28 @@ function clearComparison(message='Load an exported historical JSON snapshot to c
  el('comparison-changes').replaceChildren();
  el('download-comparison').disabled=true;
 }
+function showComparison(baseline){
+ const diff=compareSnapshots(baseline,latest);
+ compared=diff;
+ const label=diff.changes.length===0
+   ? 'No differences found in '+diff.fieldsCompared+' compared fields.'
+   : diff.changes.length+' field changes detected out of '+diff.fieldsCompared+'.';
+ el('comparison-summary').textContent='CPU '+diff.cpuIndex+
+   ' · baseline block '+diff.baselineBlock+' → latest block '+diff.liveBlock+'. '+label+
+   ' Imported reference data is not independently cryptographically authenticated.';
+ const list=el('comparison-changes');list.replaceChildren();
+ if(diff.cpuIdentityChanged){
+  const li=document.createElement('li');li.className='diagnostic warning';
+  li.textContent='CPU circuit or transistor contract address changed. Other fields may now refer to DIFFERENT contract instances; revalidate interpretation.';
+  list.append(li);
+ }
+ for(const item of diff.changes){
+  const li=document.createElement('li');li.className='diagnostic caution';
+  li.textContent=item.label+': '+item.before+' → '+item.after;
+  list.append(li);
+ }
+ el('download-comparison').disabled=false;
+}
 async function compareHistorical(){
  if(busy)return;
  if(!latest){el('comparison-summary').textContent='Load a live chain snapshot first.';return;}
@@ -132,32 +154,35 @@ async function compareHistorical(){
  el('compare-historical').disabled=true;
  try{
   const baseline=JSON.parse(await file.text());
-  const diff=compareSnapshots(baseline,latest);
-  compared=diff;
-  const label=diff.changes.length===0
-    ? 'No differences found in '+diff.fieldsCompared+' compared fields.'
-    : diff.changes.length+' field changes detected out of '+diff.fieldsCompared+'.';
-  el('comparison-summary').textContent='CPU '+diff.cpuIndex+
-    ' · baseline block '+diff.baselineBlock+' → latest block '+diff.liveBlock+'. '+label+
-    ' Imported evidence is not cryptographically authenticated.';
-  const list=el('comparison-changes');list.replaceChildren();
-  if(diff.cpuIdentityChanged){
-   const li=document.createElement('li');li.className='diagnostic warning';
-   li.textContent='CPU circuit or transistor contract address changed. Other fields may now refer to DIFFERENT contract instances; revalidate interpretation.';
-   list.append(li);
-  }
-  for(const item of diff.changes){
-   const li=document.createElement('li');li.className='diagnostic caution';
-   li.textContent=item.label+': '+item.before+' → '+item.after;
-   list.append(li);
-  }
-  el('download-comparison').disabled=false;
+  showComparison(baseline);
  }catch(err){
   clearComparison('Comparison refused: '+(err instanceof Error?err.message:'unreadable JSON'));
  }finally{el('compare-historical').disabled=false;}
 }
+async function compareBundledExample(){
+ if(busy)return;
+ if(!latest){el('comparison-summary').textContent='Load a live chain snapshot first.';return;}
+ const button=el('compare-bundled-example');
+ button.disabled=true;
+ clearComparison('Reading the published CPU0 example from this site. No personal files leave your browser.');
+ const abort=new AbortController();
+ const timer=setTimeout(()=>abort.abort(),8000);
+ try{
+  const response=await fetch('./evidence/tapeout-cpu0-block73915245.json',{
+    method:'GET',credentials:'omit',cache:'no-store',signal:abort.signal
+  });
+  if(!response.ok)throw new Error('example HTTP '+response.status);
+  const raw=await response.text();
+  if(raw.length>256*1024)throw new Error('example exceeds the 256 KiB limit');
+  const baseline=JSON.parse(raw);
+  showComparison(baseline);
+ }catch(err){
+  clearComparison('Bundled example unavailable: '+(err instanceof Error?err.message:'unknown'));
+ }finally{clearTimeout(timer);button.disabled=false;}
+}
 el('refresh').addEventListener('click',refresh);
 el('compare-historical').addEventListener('click',compareHistorical);
+el('compare-bundled-example').addEventListener('click',compareBundledExample);
 el('baseline-file').addEventListener('change',()=>clearComparison('New local evidence selected. Click Compare with current block.'));
 el('download-comparison').addEventListener('click',()=>{
  if(compared)download('tapeout-xlayer-comparison-'+compared.baselineBlock+'-to-'+compared.liveBlock+'.json',

@@ -86,10 +86,11 @@
       <div><div class="eyebrow">05 / HISTORY · CROSS-BLOCK DIFF</div><h2 id="compare-heading">What changed since your last snapshot?</h2></div>
       <span class="kicker">LOCAL FILE · NO UPLOAD</span>
     </div>
-    <p class="annotation history-intro">Import an earlier JSON export of the <strong>same TapeOut processor</strong>, then compare its recorded block to the current X Layer reading. Only a strict allowlist of 20 on-chain fields is compared. Partial reads, wrong networks, mismatched CPU indexes and malformed values fail closed.</p>
+    <p class="annotation history-intro">Import an earlier JSON export of the <strong>same TapeOut processor</strong>, then compare its recorded block to the current X Layer reading. Try the bundled public historical CPU0 example in one click or import your own local file; only a strict allowlist of 20 on-chain fields is compared. Partial reads, wrong networks, mismatched CPU indexes and malformed values fail closed.</p>
     <div class="history-inputs">
       <label for="baseline-file">Earlier X Layer evidence JSON (max 256 KiB)</label>
       <input id="baseline-file" type="file" accept=".json,application/json" aria-describedby="compare-import-warning">
+      <button id="compare-bundled-example" type="button" class="primary">▶ Try published CPU0 example</button>
       <button id="compare-historical" type="button" class="primary">Compare with current block →</button>
       <button id="download-comparison" type="button" class="secondary" disabled>↓ Export differences as JSON</button>
     </div>
