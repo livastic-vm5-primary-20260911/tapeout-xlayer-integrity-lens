@@ -57,3 +57,17 @@ test('distinct second TapeOut 0.01 BaseUSDC buyer SKU shows exact free sample, s
  assert.ok(readme.includes('No independent outside customer receipt'));
  assert.ok(readme.includes('pre-existing 13 other merchant recipients'));
 });
+
+test('agent buyers can verify both independent zero-fee discovery listings without mistaking live probes for income',()=>{
+ const agent='https://agent402.tools/api/index?seller=vm5-openapi-x402.onrender.com';
+ const check='https://settled.tools/v1/free/check?url=https%3A%2F%2Fvm5-openapi-x402.onrender.com%2Fv1%2Ftapeout-cpu0-diff';
+ assert.ok(commercial.includes('href="'+agent+'"'));
+ assert.ok(commercial.includes('href="'+check+'"'));
+ assert.ok(readme.includes(']('+agent+')'));
+ assert.ok(readme.includes(']('+check+')'));
+ assert.match(commercial,/normal external router still requires settlement history/);
+ assert.match(commercial,/no paid purchase yet/);
+ assert.match(readme,/no scout payment delivery confirmed/i);
+ assert.match(readme,/PayAPI listing remains under human review/);
+ assert.ok(commercial.includes('the free in-browser comparison is always available'));
+});

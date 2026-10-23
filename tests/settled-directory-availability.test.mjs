@@ -14,9 +14,9 @@ test('external directory link uses FREE public exact-resource peek and not the p
 
 test('live listing is never conflated with buyer order, delivery or unique wallet receipt', () => {
   assert.ok(html.includes('listed as <strong>live</strong>'));
-  assert.ok(html.includes('not</strong> independent proof'));
-  assert.ok(html.includes('finalized USDC'));
-  assert.ok(html.includes('quality score may change'));
+  assert.ok(html.includes('is <strong>not</strong> proof of customer payment'));
+  assert.ok(html.includes('unique finalized native Circle USDC'));
+  assert.ok(html.includes('Live quality numbers can change'));
   assert.ok(!html.includes('Settled confirmed our second customer'));
 });
 
