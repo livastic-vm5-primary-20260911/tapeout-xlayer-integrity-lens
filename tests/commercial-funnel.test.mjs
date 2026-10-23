@@ -71,3 +71,13 @@ test('agent buyers can verify both independent zero-fee discovery listings witho
  assert.match(readme,/PayAPI listing remains under human review/);
  assert.ok(commercial.includes('the free in-browser comparison is always available'));
 });
+
+test('paying customers can inspect free deterministic review evidence before a fixed-price contract',()=>{
+ const path='./evidence/tapeout-review-block73915245-to-73947001.json';
+ assert.ok(commercial.includes('href="'+path+'"'));
+ assert.ok(commercial.includes('href="./#review-heading"'));
+ assert.match(commercial,/Shipped 24 October 2026/);
+ assert.match(commercial,/not<\/strong> a security score or proof of compromise/i);
+ assert.match(commercial,/only under a separate written fixed-price scope and buyer acceptance/);
+ assert.ok(commercial.indexOf('href="'+path+'"')<commercial.indexOf('Paid machine API · HTTP 402'));
+});
