@@ -9,7 +9,7 @@ Deadline: **2026-12-07 23:59 UTC** (confirm official updates before filing). Req
 - **Project:** TapeOut Integrity Lens — a public read-only operations and contract transparency dashboard for developers and prospective participants in the TapeOut ecosystem.
 - **GitHub:** https://github.com/livastic-vm5-primary-20260911/tapeout-xlayer-integrity-lens
 - **Live demo:** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/
-- **Demo video (19.4 s):** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-lens-demo.mp4
+- **Updated official demo video (29.08 s, under 3-minute limit):** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-history-real-demo-20261023.mp4
 - **Source license:** MIT.
 - **X Layer mainnet chain ID:** 196.
 - **TapeOut factory:** 0x1f09daefa827f02cbb40967cc91b259763760761
