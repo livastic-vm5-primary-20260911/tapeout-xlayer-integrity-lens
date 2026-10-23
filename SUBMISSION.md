@@ -16,7 +16,7 @@ Deadline: **2026-12-07 23:59 UTC** (confirm official updates before filing). Req
 - **Circuit market:** 0xd89f358c48a7B632c9845af2a02A32eB90DD75DB
 - **Genesis CPU (factory index 0):** 0x839bdd6fa7a66416a609a735e11de5411b98574e
 - **Proof snapshot (pinned block 73915245):** evidence/tapeout-cpu0-block73915245.json
-- **Event-period development:** New repo and app, X Layer JSON-RPC interface, pinned-block TapeOut CPU discovery, EIP-1967 slot transparency, quote math, JSON/CSV evidence download, diagnostic guardrails, test harness with 14 passing tests, user-facing responsive website, recorded no-wallet live demo; implementation dates 2026-10-23 KST.
+- **Event-period development:** New repo and app, X Layer JSON-RPC interface, pinned-block TapeOut CPU discovery, EIP-1967 slot transparency, quote math, JSON/CSV evidence download, diagnostic guardrails, test harness with 30 passing tests including 12 strict local before/after snapshot tests, user-facing responsive website, recorded no-wallet live demo; implementation dates 2026-10-23 KST.
 
 ## Elevator pitch
 
@@ -26,13 +26,36 @@ TapeOut Integrity Lens reduces the information and trust gap for builders using 
 
 - **Audience:** X Layer TapeOut builders, protocol integrators, DeFi security engineering leads and B2B vendor diligence teams.
 - **Pain:** Public contract state is scattered across block explorers, proxy storage, function selectors and per-CPU contracts; teams need reproducible change evidence before deployments and audits.
-- **Free product:** Live single-block explorer, responsive CPU inspector, per-use CSV/JSON snapshots, readable fee math.
-- **Possible paid extensions (not shipped or contracted):** $19-49/month monitored change alerts with reproducible historical diffs; $99-299 one-off bounded signed *data provenance* reports (not security attestations) for approved paid enterprise scopes; optional JSON API only if real demand emerges. Prices are test hypotheses, not income.
+- **Free product:** Live single-block explorer, responsive CPU inspector, per-use CSV/JSON snapshots and a new 20-field before/after diff for the same CPU, readable fee math.
+- **Possible paid extensions (not shipped or contracted):** $19-49/month monitored change alerts using the now-shipped manual, local before/after diff as a technical precursor; $99-299 one-off bounded third-party *data provenance* reports (not security attestations) for approved paid enterprise scopes; optional JSON API only if real demand emerges. Prices are test hypotheses, not income.
 - **Acquisition:** transparent developer documentation, GitHub examples and one-to-one outreach to verifiable TapeOut developer teams with relevant use cases; no spam, fabricated users, or free-to-paid dark patterns.
 - **Why repeat:** fee/implementation/sealing status can change as new CPUs launch; versioned block-pinned comparisons have recurrent operational value.
 
 ## Responsible participation blockers
 
 The official Google Form currently requires 10 answers. Six are personal/team/contact fields: full legal name, nationality, team name, Telegram handle, team contact email, team size; others are team background, pitch, GitHub and demo video. Real full name, verified nationality, Telegram handle and age-of-majority eligibility were **not supplied** in the available authoritative records. Do not invent, use aliases as legal truth, or attest to adult status. Leave the final entry **not submitted** until the owner supplies truthful required personal information and confirms legal eligibility. No crypto fee, gas, wallet transaction, KYC spoofing or alternate account to bypass this gate.
+
+### Actual live functionality and evidence (23 October 2026)
+
+We ran the same public X Layer RPC interface against CPU0 at block **73,947,001** with **22 read-only eth_call/storage/network requests**, zero errors and `partial=false`. Compared with the preexisting CPU0 pinned evidence for block **73,915,245**, 20 whitelist fields produced two differences: factory registered CPUs **387→388** and factory EIP-1967 implementation **0x74956236ab64ed143933040b4137e8a352e4d17b → 0xb41c1e7602eb5734be2430b72178ccb814a5293d**. The latter also appears in an intervening, previously captured public demo snapshot; this comparison does *not* establish that the upgrade happened during today's observation window, let alone an exploit. It only captures value drift over the two pinned blocks. Source evidence: [later CPU0 snapshot](evidence/tapeout-cpu0-block73947001.json) and [client-side two-block comparison](evidence/tapeout-compare-73915245-to-73947001.json). The imported reference is not separately cryptographically verified; independent mainnet consensus and authorization analysis would be needed for any formal audit. Node tests after the addition: **35/35** if the new regression comparison test passes.
+
+### Actual official Google Form: ten answers (not submitted)
+
+The original existing VM5 Google account opened the exact official Google Form on 2026-10-23 KST (read-only). These fields are accurate and can be used by the real human applicant once eligibility is proven. Never submit under an invented natural person's identity or Telegram profile.
+
+| Required field | Verified draft answer |
+| --- | --- |
+| Full Name | **OWNER HUMAN REQUIRED**: genuine verified individual legal full name; no project alias |
+| Nationality | **OWNER HUMAN REQUIRED**: correct nationality and eligibility, not guessed from current location |
+| Team name | VM5 Delivery Lab (independent project name; not a registered firm) |
+| Telegram handle | **OWNER HUMAN REQUIRED**: real Telegram account handle with owner control |
+| Team contact email | onecursor1@gmail.com (the existing original confirmed project email; verify it remains authorized) |
+| How many people | 1 real human owner; AI agents are software tools, NOT human team members |
+| Tell us about your team/background | An independent Korean-based software creator, supported transparently by AI tools. We ship reproducible JavaScript/API tests, offline evidence tooling and publicly verifiable web applications. Our TapeOut app uses public X Layer contract reads and already has a production read-only demo. We do not claim a registered professional audit firm, previous commercial TapeOut customers, formal security certifications or pre-existing prize winnings. |
+| Elevator pitch | **TapeOut Integrity Lens makes on-chain processor settings auditable for builders before they ship.** X Layer participants currently have to piece together TapeOut factory settings, CPU fee structures, token supply, market fee, governance flags and EIP-1967 upgrade information from many contracts. Our deployed wallet-free dashboard reads actual TapeOut CPU factory and marketplace contracts on X Layer mainnet (196), pins values to a block, and lets a builder safely compare an earlier locally saved snapshot against 20 refreshed chain fields. Developers export JSON/CSV evidence with no API key, gas, key sharing or wallet connection. Our separate Base x402 v2 paid 0.005-USDC machine report is live as a pay-per-call offering to original owner wallet, but new endpoint customer revenue has not yet been independently verified. We aim to convert genuine ecosystem due-diligence demand into finite $49 scoped evidence comparisons first; recurring alerts are a possible future service, not an existing paid capability. This is an independent data transparency tool, not a contract audit, oracle, financial advice or sponsor-backed guarantee. |
+| GitHub repo | https://github.com/livastic-vm5-primary-20260911/tapeout-xlayer-integrity-lens |
+| Demo video (maximum 3 min) | https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-lens-demo.mp4 (actual 19.4 s visual demo recorded before the comparison addition; video DOES NOT demonstrate the new comparison yet) |
+
+**Submission and prize gates:** Official event deadline Dec 7 23:59 UTC (recheck original rules). The top prize is nominal 20,000 USDT and the nominal prize pool is 100,000 USDT, not current receivable or guarantee. Winners may need a genuine human legal/age/region identity, offline Demo Day and milestones for staggered payout, safe supported USDT network/custody and tax compliance. The original MetaMask's Base Circle USDC address cannot be assumed to receive an arbitrary USDT prize network. No legal acceptance on behalf of an unidentified human. Presently contest registration 0, confirmed prize 0, buyer orders 0.
 
 No judges contacted, no award, paid lead, or contract is proven by software publication alone.

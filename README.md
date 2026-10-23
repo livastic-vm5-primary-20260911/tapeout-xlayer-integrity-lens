@@ -11,11 +11,22 @@ It reads live data pinned to one block on X Layer **mainnet chain 196**. No back
 - TapeOut CPU factory: on-chain CPU count, current deployment/protocol fees, owner, `isSealed` and EIP-1967 proxy implementation.
 - TapeOut circuit market: current fee in basis points, listing counter, owner, sealing status and implementation slot.
 - CPU inspector: choose an index from the **factory's live registry**. Resolve its circuit contract and transistor token; inspect mint supply, creator, unit mint fee, protocol fee, tapeout fee and last circuit ID at the same block.
-- Deterministic math-based fee quote (not gas). Exports verifiable JSON and CSV evidence with block number.
+- Deterministic math-based fee quote (not gas). Exports pinned-block JSON and CSV evidence.
+- **New 23 Oct 2026:** strict local before/after evidence comparison: import a previously exported JSON file from the same CPU, compare 20 real contract fields against a newer live block, flag fee/owner/implementation/minted-supply changes, and download a versioned comparison JSON. Nothing is uploaded; invalid or partial snapshots fail closed. An imported file is *not* cryptographically authenticated and should never be mistaken for an independently verified event.
 - Diagnostics about upgradeability and administrative controls. Missing reads are explicitly unknown, never assumed safe.
 - RPC: [official X Layer endpoints](https://web3.okx.pro/onchainos/dev-docs/xlayer/developer/rpc-endpoints/rpc-endpoints), 100 requests/sec per IP; this uses at most a few dozen calls per requested refresh. It **does not** bypass rate limiting. No `eth_sendRawTransaction`, `personal_sign`, `eth_sign`, `eth_requestAccounts` or wallet connection.
 
 Reference X Layer TapeOut contracts and interfaces independently described and test-fork verified by [NetLayerLabs/Cerebr TAPEOUT.md](https://github.com/NetLayerLabs/Cerebr/blob/main/TAPEOUT.md). The explorer reads the present mainnet state, not hard-coded values from that report.
+
+### Compare two historical readings safely
+
+1. Open the public browser app and select CPU index 0. Click **Refresh live chain state**.
+2. Under **05 / HISTORY**, choose an older local `.json` file created by this explorer. For a reproducible first trial, download [the CPU0 pinned-block example](evidence/tapeout-cpu0-block73915245.json) and use that; it is a supplied example, not independent proof of today's chain state.
+3. Click **Compare with current block**. Changed CPU creation/protocol fees, market fees, sealing and proxy implementation, processor/token supply and other fields are displayed with before/after values. Different networks, CPU indices, historical order, invalid types and partial/error snapshots are rejected.
+4. [Inspect a real two-block comparison example](evidence/tapeout-compare-73915245-to-73947001.json) from the first-party public X Layer RPC reads at blocks 73,915,245 and 73,947,001. It shows factory CPU count **387 → 388** and proxy implementation **0x749562… → 0xb41c1e…**. This demonstrates a detectable value difference, **not a verified safety incident or unanticipated attack**.
+5. Export the comparison as JSON for your own independent review. The file contains `baselineBlock` / `liveBlock`, 20 explicitly allowlisted fields and any changes. It does not prove the imported reference is authentic. **Never act on a diff alone to send assets or sign a transaction.**
+
+This local comparison offers genuine developer utility: it makes configuration drift at two exact X Layer blocks inspectable without paid surveillance or a wallet. It does not claim continuous monitoring, automatic notifications, attack detection, verified contract safety or existing customer revenue.
 
 ### Development
 

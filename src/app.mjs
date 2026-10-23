@@ -1,9 +1,10 @@
 import {PublicRpc} from './rpc.mjs';
 import {decimalUnits,diagnostics,quoteMint,publicJson} from './core.mjs';
+import {compareSnapshots} from './compare.mjs';
 
 const rpc=new PublicRpc();
 const el=id=>document.getElementById(id);
-let latest=null, busy=false;
+let latest=null, busy=false, compared=null;
 
 function setStatus(kind,message) {
  const pill=el('status-pill');
@@ -43,6 +44,7 @@ function drawCost(){
 }
 function draw(snapshot){
  latest=snapshot;
+ clearComparison('Live snapshot refreshed. Choose a matching older JSON file to compare with this block.');
  const f=snapshot.factory,m=snapshot.market,p=snapshot.processor;
  el('cpu-count').textContent=num(f.cpuCount);
  el('deployment-fee').textContent=okb(f.deployFee);
@@ -87,7 +89,12 @@ async function refresh(){
  busy=true;el('refresh').disabled=true;
  setStatus('loading','Fetching from official public X Layer RPC. No wallet connection.');
  try{ const snap=await rpc.snapshot(index); draw(snap); }
- catch(e){setStatus('failed',String(e.message));}
+ catch(e){
+  latest=null;
+  el('download-json').disabled=true;el('download-csv').disabled=true;
+  clearComparison('Live refresh failed; previous metric values may be stale. Try refreshing before comparing.');
+  setStatus('failed','Live refresh unavailable: '+String(e.message));
+ }
  finally{busy=false;el('refresh').disabled=false;}
 }
 function download(name,contents,type){
@@ -110,7 +117,52 @@ function csv(v){
  }
  return rows.map(row=>row.map(value=>'"'+String(value).replaceAll('"','""')+'"').join(',')).join('\r\n')+'\r\n';
 }
+function clearComparison(message='Load an exported historical JSON snapshot to compare on-chain fields.'){
+ compared=null;
+ el('comparison-summary').textContent=message;
+ el('comparison-changes').replaceChildren();
+ el('download-comparison').disabled=true;
+}
+async function compareHistorical(){
+ if(busy)return;
+ if(!latest){el('comparison-summary').textContent='Load a live chain snapshot first.';return;}
+ const file=el('baseline-file').files?.[0];
+ if(!file){el('comparison-summary').textContent='Choose a JSON file exported from the same CPU.';return;}
+ if(file.size>256*1024){clearComparison('Reference file too large: 256 KiB maximum.');return;}
+ el('compare-historical').disabled=true;
+ try{
+  const baseline=JSON.parse(await file.text());
+  const diff=compareSnapshots(baseline,latest);
+  compared=diff;
+  const label=diff.changes.length===0
+    ? 'No differences found in '+diff.fieldsCompared+' compared fields.'
+    : diff.changes.length+' field changes detected out of '+diff.fieldsCompared+'.';
+  el('comparison-summary').textContent='CPU '+diff.cpuIndex+
+    ' · baseline block '+diff.baselineBlock+' → latest block '+diff.liveBlock+'. '+label+
+    ' Imported evidence is not cryptographically authenticated.';
+  const list=el('comparison-changes');list.replaceChildren();
+  if(diff.cpuIdentityChanged){
+   const li=document.createElement('li');li.className='diagnostic warning';
+   li.textContent='CPU circuit or transistor contract address changed. Other fields may now refer to DIFFERENT contract instances; revalidate interpretation.';
+   list.append(li);
+  }
+  for(const item of diff.changes){
+   const li=document.createElement('li');li.className='diagnostic caution';
+   li.textContent=item.label+': '+item.before+' → '+item.after;
+   list.append(li);
+  }
+  el('download-comparison').disabled=false;
+ }catch(err){
+  clearComparison('Comparison refused: '+(err instanceof Error?err.message:'unreadable JSON'));
+ }finally{el('compare-historical').disabled=false;}
+}
 el('refresh').addEventListener('click',refresh);
+el('compare-historical').addEventListener('click',compareHistorical);
+el('baseline-file').addEventListener('change',()=>clearComparison('New local evidence selected. Click Compare with current block.'));
+el('download-comparison').addEventListener('click',()=>{
+ if(compared)download('tapeout-xlayer-comparison-'+compared.baselineBlock+'-to-'+compared.liveBlock+'.json',
+     publicJson(compared)+'\n','application/json');
+});
 el('selector-form').addEventListener('submit',e=>{e.preventDefault();refresh();});
 el('quote-form').addEventListener('submit',e=>{e.preventDefault();drawCost();});
 el('download-json').addEventListener('click',()=>{if(latest)download('tapeout-xlayer-evidence-block-'+latest.blockNumber+'.json',publicJson(latest)+'\n','application/json');});

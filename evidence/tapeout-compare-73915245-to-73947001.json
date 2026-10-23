@@ -1,0 +1,25 @@
+{
+  "schema": "TapeOutXLayerRiskLens/comparison-v1",
+  "network": "eip155:196",
+  "cpuIndex": "0",
+  "baselineBlock": "73915245",
+  "liveBlock": "73947001",
+  "fieldsCompared": 20,
+  "changes": [
+    {
+      "field": "factory.cpuCount",
+      "label": "Registered processor count",
+      "before": "387",
+      "after": "388"
+    },
+    {
+      "field": "factory.implementation",
+      "label": "Factory proxy implementation",
+      "before": "0x74956236ab64ed143933040b4137e8a352e4d17b",
+      "after": "0xb41c1e7602eb5734be2430b72178ccb814a5293d"
+    }
+  ],
+  "unchangedCount": 18,
+  "cpuIdentityChanged": false,
+  "provenance": "Comparison of one client-imported, unverified JSON reference and one public-RPC latest view. NOT a chain-proof, security audit, oracle, or contract endorsement."
+}

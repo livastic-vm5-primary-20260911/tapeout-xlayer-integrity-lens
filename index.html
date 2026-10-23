@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Free, read-only TapeOut contract intelligence on X Layer. Live protocol fees, proxy status, CPU processor inspection, and verifiable JSON snapshot.">
+  <meta name="description" content="Read-only TapeOut intelligence on X Layer: factory fees, proxy upgrades, processor inspection and local before/after JSON snapshot comparison.">
   <meta name="theme-color" content="#101620">
   <title>TapeOut Integrity Lens • X Layer</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101620'/%3E%3Cpath d='M13 39L26 25L36 34L50 19' fill='none' stroke='%2386f7c0' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -80,6 +80,22 @@
       <div class="section-head"><div><div class="eyebrow">04 / VERIFICATION NOTES</div><h2>What deserves a second look</h2></div></div>
       <ul id="diagnostics" class="diagnostics"><li class="diagnostic">No data yet. Read chain state to inspect configuration.</li></ul>
     </article>
+  </section>
+  <section class="panel history-panel" aria-labelledby="compare-heading">
+    <div class="section-head">
+      <div><div class="eyebrow">05 / HISTORY · CROSS-BLOCK DIFF</div><h2 id="compare-heading">What changed since your last snapshot?</h2></div>
+      <span class="kicker">LOCAL FILE · NO UPLOAD</span>
+    </div>
+    <p class="annotation history-intro">Import an earlier JSON export of the <strong>same TapeOut processor</strong>, then compare its recorded block to the current X Layer reading. Only a strict allowlist of 20 on-chain fields is compared. Partial reads, wrong networks, mismatched CPU indexes and malformed values fail closed.</p>
+    <div class="history-inputs">
+      <label for="baseline-file">Earlier X Layer evidence JSON (max 256 KiB)</label>
+      <input id="baseline-file" type="file" accept=".json,application/json" aria-describedby="compare-import-warning">
+      <button id="compare-historical" type="button" class="primary">Compare with current block →</button>
+      <button id="download-comparison" type="button" class="secondary" disabled>↓ Export differences as JSON</button>
+    </div>
+    <p class="annotation" id="compare-import-warning">The file stays in your browser: no uploads, wallet connection, signing or transaction. You may use our <a href="./evidence/tapeout-cpu0-block73915245.json" target="_blank" rel="noopener noreferrer"><u>earlier CPU0 snapshot</u></a> when inspecting CPU 0. A <a href="./evidence/tapeout-compare-73915245-to-73947001.json" target="_blank" rel="noopener noreferrer"><u>real two-block example from 23 October</u></a> illustrates an observed count change and a proxy implementation-address difference (not a security finding). Imported JSON is user-supplied, not cryptographically authenticated; a detected difference is not proof of an exploit, threat or security audit.</p>
+    <p id="comparison-summary" aria-live="polite" class="comparison-status">Load the live state, then select an older JSON snapshot to compare.</p>
+    <ul class="diagnostics history-results" id="comparison-changes" aria-label="Changed fields"></ul>
   </section>
   <section class="evidence">
     <div><h2>Inspect the source, not the marketing.</h2><p>Every value comes from public on-chain reads pinned to a common block. Export an evidence snapshot with block number, contract addresses and retrieved values. This is operational transparency—not a security audit, token endorsement, custody check, escrow verification or financial advice.</p></div>

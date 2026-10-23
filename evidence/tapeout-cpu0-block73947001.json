@@ -1,0 +1,41 @@
+{
+  "schema": "TapeOutXLayerRiskLens/v1",
+  "timestamp": "2026-10-23T00:40:37.848Z",
+  "chainId": 196,
+  "blockNumber": "73947001",
+  "rpcSources": [
+    "rpc.xlayer.tech",
+    "xlayerrpc.okx.com"
+  ],
+  "factory": {
+    "address": "0x1f09daefa827f02cbb40967cc91b259763760761",
+    "cpuCount": "388",
+    "deployFee": "6600000000000000",
+    "protocolFee": "660000000000000",
+    "isSealed": false,
+    "owner": "0xb3d85b42a045c1a88d800cad0f55d2566a4d3138",
+    "implementation": "0xb41c1e7602eb5734be2430b72178ccb814a5293d"
+  },
+  "market": {
+    "address": "0xd89f358c48a7B632c9845af2a02A32eB90DD75DB",
+    "feeBps": 100,
+    "isSealed": false,
+    "owner": "0xb3d85b42a045c1a88d800cad0f55d2566a4d3138",
+    "implementation": "0x38d688f4793a9bf270c2c99492c9a1e45163db6e",
+    "nextListingId": "4"
+  },
+  "processor": {
+    "index": "0",
+    "circuits": "0x839bdd6fa7a66416a609a735e11de5411b98574e",
+    "nextId": "103",
+    "tapeoutFee": "1300000000000000",
+    "transistors": "0xbe0eee424c49d44592e4d498740f5b031ef8e26d",
+    "mintPrice": "0",
+    "minted": "100000",
+    "supplyCap": "100000",
+    "protocolFee": "660000000000000",
+    "creator": "0x571d447f4f24688ec35ccf07f1d6993655f6af15"
+  },
+  "partial": false,
+  "errors": []
+}
