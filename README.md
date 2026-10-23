@@ -51,6 +51,8 @@ Potential paying users: TapeOut processor creators, ecosystem marketplaces, corp
 
 **Independent, no-fee distribution status (24 October):** Our existing one-owner x402 seller origin is [indexed by Agent402](https://agent402.tools/api/index?seller=vm5-openapi-x402.onrender.com) at 30 discoverable tools / 15 paid, including the new historical diff SKU. The exact new endpoint's [Settled free check](https://settled.tools/v1/free/check?url=https%3A%2F%2Fvm5-openapi-x402.onrender.com%2Fv1%2Ftapeout-cpu0-diff) separately returned live and payable at its GET HTTP402, with **no scout payment delivery confirmed**. Settled and Agent402 do not certify payee ownership, human payer activity, or final original VM1 wallet receipts. The new PayAPI listing remains under human review; do not count any free listing or check as sales.
 
+**Free published paid-response JSON Schema:** The separate historical-state-diff API has a [public self-contained JSON Schema](./data/tapeout-cpu0-diff-paid-response.schema.json), generated from its actual source OpenAPI definition (17 required response keys, strict `changes[{field,label,before,after}]` items and normalized string values, 20 measured fields). This is **not a fabricated paid response, a purchase, delivery evidence, an on-chain transfer or certification**. The deployed Render `openapi.json` may temporarily lag the linked source commit; buyers should check the actual live HTTP402 quote and service health. Its existence does not bypass any marketplace's required real settlement history or customer eligibility.
+
 ### Caveats
 
 - This is NOT a smart contract security audit, oracle, market price guarantee, escrow proof or financial advice.

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/data/tapeout-cpu0-diff-paid-response.schema.json",
+  "title": "TapeOut CPU0 Historical State Diff — paid x402 response, schema v1",
+  "description": "FREE machine-readable format for the optional 0.01 native Circle BaseUSDC paid GET on X Layer data. This file is NOT a paid report, settlement receipt, signature, confirmation of customer sales or independent blockchain audit.",
+  "$comment": "Generated from the ORIGINAL source-committed application/json 200 response schema on GitHub main 9b31151. Render deployment of this response schema is not presumed; inspect live HTTP402 quote and actual paid server before relying on delivery.",
+  "type": "object",
+  "required": [
+    "ok",
+    "paid",
+    "chargedUSDC",
+    "kind",
+    "schema",
+    "chainId",
+    "cpuIndex",
+    "network",
+    "baselineBlock",
+    "liveBlock",
+    "fieldsCompared",
+    "changes",
+    "changeCount",
+    "unchangedCount",
+    "warning",
+    "originalVM1PayoutAddress",
+    "independentOutsideBuyersForThisNewSKU"
+  ],
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "description": "True only after successful x402 middleware completion"
+    },
+    "paid": {
+      "type": "boolean",
+      "description": "True only in the payment-gated handler (not a separate wallet settlement attestation)"
+    },
+    "chargedUSDC": {
+      "type": "string",
+      "const": "0.01"
+    },
+    "kind": {
+      "type": "string",
+      "const": "xlayer_tapeout_cpu0_pinned_state_diff"
+    },
+    "schema": {
+      "type": "string",
+      "const": "TapeOutXLayerRiskLens/paid-diff-v1"
+    },
+    "chainId": {
+      "type": "integer",
+      "const": 196
+    },
+    "network": {
+      "type": "string",
+      "const": "eip155:196",
+      "description": "X Layer data source, separate from Base eip155:8453 payment"
+    },
+    "cpuIndex": {
+      "type": "integer",
+      "const": 0
+    },
+    "baselineBlock": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "liveBlock": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "fieldsCompared": {
+      "type": "integer",
+      "const": 20
+    },
+    "changeCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20
+    },
+    "unchangedCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20
+    },
+    "changes": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "label",
+          "before",
+          "after"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Machine-readable dotted source field path"
+          },
+          "label": {
+            "type": "string"
+          },
+          "before": {
+            "type": "string",
+            "description": "Strictly validated and normalized historical on-chain value"
+          },
+          "after": {
+            "type": "string",
+            "description": "Strictly validated and normalized latest on-chain value"
+          }
+        }
+      }
+    },
+    "cpuIdentityChanged": {
+      "type": "boolean"
+    },
+    "warning": {
+      "type": "string",
+      "description": "This is not a formal audit, independent RPC consensus proof or buying advice."
+    },
+    "source": {
+      "type": "object",
+      "description": "Only public X Layer factory/market and pinned RPC read method metadata"
+    },
+    "olderFullSnapshotDiagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "latestFullSnapshotDiagnostics": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "noWalletKeysRequired": {
+      "type": "boolean"
+    },
+    "noTransactionSent": {
+      "type": "boolean"
+    },
+    "originalVM1PayoutAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "independentOutsideBuyersForThisNewSKU": {
+      "type": "integer",
+      "const": 0,
+      "description": "Initial creation-time baseline; not a real-time buyer count"
+    },
+    "disclosure": {
+      "type": "string"
+    }
+  }
+}
