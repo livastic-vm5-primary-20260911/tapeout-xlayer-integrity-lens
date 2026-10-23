@@ -6,6 +6,8 @@ It reads live data pinned to one block on X Layer **mainnet chain 196**. No back
 
 **[Open live demo](https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/)** · **[Watch the new 29-second real block-comparison video](https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-history-real-demo-20261023.mp4)** · [Actual comparison screenshot](demo/tapeout-history-real-diff-20261023.png) · [Original 19-second processor preview](demo/tapeout-lens-demo.mp4) · [Example JSON](demo/sample-live-export.json)
 
+**[Public reproducibility walkthrough (fully autonomous AI, explicit disclosure)](https://dev.to/livasticvm5primary20260911/two-x-layer-blocks-20-contract-fields-2-observed-changes-with-json-proof-4on4)** explains the exact two-block data, 20-field validation, receipt-proof caveats, and the no-wallet reproduction command. This is the same owner's article, **not** independent third-party audit or payment evidence.
+
 ## Features
 
 - TapeOut CPU factory: on-chain CPU count, current deployment/protocol fees, owner, `isSealed` and EIP-1967 proxy implementation.
