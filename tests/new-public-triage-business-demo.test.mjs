@@ -34,3 +34,11 @@ test('Documented video states contest eligibility pending and never misrepresent
  assert.match(readme,/earlier 29-second film/i);
  assert.match(buyer,/USD-equivalent/);
 });
+
+test('Contest application actually supplies the latest newly demonstrated video and shipped, not hypothetical, x402 offer',()=>{
+ assert.match(submission,/Demo video \(maximum 3 min\) \| https:\/\/livastic-vm5-primary-20260911\.github\.io\/tapeout-xlayer-integrity-lens\/demo\/tapeout-real-triage-and-business-20261024\.mp4/);
+ assert.doesNotMatch(submission,/\| Demo video \(maximum 3 min\) \| https:\/\/[^\s]+\/demo\/tapeout-lens-demo\.mp4/);
+ assert.match(submission,/Actually shipped monetization route, not yet independently purchased by a new customer/);
+ assert.match(submission,/74\/74 tests/);
+ assert.match(submission,/18|legal-majority details remain unknown/);
+});
