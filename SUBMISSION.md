@@ -9,7 +9,7 @@ Deadline: **2026-12-07 23:59 UTC** (confirm official updates before filing). Req
 - **Project:** TapeOut Integrity Lens — a public read-only operations and contract transparency dashboard for developers and prospective participants in the TapeOut ecosystem.
 - **GitHub:** https://github.com/livastic-vm5-primary-20260911/tapeout-xlayer-integrity-lens
 - **Live demo:** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/
-- **Updated official demo video (29.08 s, under 3-minute limit):** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-history-real-demo-20261023.mp4
+- **NEW latest-feature hackathon demo video (53.6 s, under 3-minute limit, real live chain + review priorities + actual JSON export + business model):** https://livastic-vm5-primary-20260911.github.io/tapeout-xlayer-integrity-lens/demo/tapeout-real-triage-and-business-20261024.mp4
 - **Source license:** MIT.
 - **X Layer mainnet chain ID:** 196.
 - **TapeOut factory:** 0x1f09daefa827f02cbb40967cc91b259763760761
@@ -42,7 +42,7 @@ This is genuine incremental functional code authored in the published project's 
 - **Regression reproducibility:** `npm test` executed under Node 22 against new and existing source, with all current 71/71 checks PASS (verified locally before publication; a later deployment must be separately checked). Browser wiring, CLI evidence, malicious input refusal and exact pinned-chain 2-field observations covered.
 - **Development value:** a zero-wallet, manual reviewer workflow that turns raw blockchain changes into prioritized engineering follow-up with deterministic traceable machine-readable output. It could inform scoped paid evidence reports, but **not** a paid order, automated subscription, continuous alert service, contract security certification or prize by itself.
 
-The existing approximately 29-second recorded real chain comparison video predates this extra review UI; do **not** claim it contains the review panel. An updated demonstration may be recorded separately, with unedited real state displayed. The submission form's legal full name, nationality, real owner Telegram and age-majority details remain unknown; no official hackathon submission or prize without human owner confirmation.
+**The 24 October NEW 53.6-second demo now ACTUALLY demonstrates the shipped review panel and real JSON export** (see [exact capture provenance](demo/RECORDING_PROVENANCE_20261024.md)): X Layer mainnet chain196 pinned block 74,032,901, historical baseline73,915,245, control/proxy review1, activity/counter1, 0 exploit claims. The prior 29-second film predates this extra UI and does not depict it. The submission form's legal full name, nationality, owner-controlled Telegram and legal-majority details remain unknown; no official hackathon submission or prize without real human owner confirmation.
 
 ## Responsible participation blockers
 
